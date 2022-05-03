@@ -4,13 +4,12 @@ from django.contrib.auth import logout as user_logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import (
     AuthenticationForm, 
-    UserCreationForm, 
     PasswordChangeForm,
 )
 from django.contrib.auth import update_session_auth_hash
 from django.views.decorators.http import require_http_methods, require_POST
 from django.shortcuts import render, redirect
-from .forms import CustomUserChangeForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 
 
@@ -49,12 +48,13 @@ def signup(request):
         return redirect('employee:index')
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_vaild():
-            
-            form.save()
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():            
+            user = form.save()
+            user_login(request, user)
+            return redirect('employee:index')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
 
     context = {
         'form' : form,
@@ -81,7 +81,7 @@ def update(request):
             form = CustomUserChangeForm(request.POST, instance=request.user)
             if form.is_valid():
                 form.save()
-                return redirect('articles:index')
+                return redirect('employee:index')
     else:
         form = CustomUserChangeForm(instance=request.user)
     context = {
@@ -98,7 +98,7 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            return redirect('articles:index')
+            return redirect('employee:index')
 
     else:
         form = PasswordChangeForm(request.user)
