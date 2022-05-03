@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>employee</h1>
+  
+  <p>1. 강의 내용</p>
+
+  <p>2. 시험 보기</p>
+  
+  <ol>
+    <li>일단은 study1, 2, 3, ... 10 만들어서 선택하게 하고 추후에 스터디를 pk로 가지게 해서 동적으로 변경</li>
+    <li>강의 내용 밑에 테스트 두기</li>
+    <li>테스트에 통과하면 다음 페이지로 넘어가기</li>
+    <li>다음 페이지로 넘어가서 QR체크인</li>
+    <li>추후에 RESTfulAPI로 변경?? 아직은 AJAX까진 필요 없을듯?? => 속도 우선순위</li>
+  <ol>
+      
+  <hr>
+  <a href="{% url 'employee:index' %}">뒤로 가기</a>
+  
+  
+{% endblock content %}
