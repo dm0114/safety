@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+# import firebase_admin
+# from firebase_admin import credentials
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +28,7 @@ SECRET_KEY = 'django-insecure-*s(**2xt1=pfzfhbb$%@%%a^$yg5ph8g%ncn8ss=#3bj22ig4u
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    ".ap-northeast-2.compute.amazonaws.com"
+    # ".ap-northeast-2.compute.amazonaws.com"
 ]
 
 
@@ -34,7 +36,14 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'employee',
+    'manager',
     'accounts',
+    'suggestions',
+    'complain',
+
+    'qr_code',
+    'bootstrap4',
+
     'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -104,6 +113,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# WEBPUSH_SETTINGS = {
+#    "VAPID_PUBLIC_KEY": "BKvEkueJoymmDmozUWo3EOUa96eWkZLNYtUddlCHZPd1gfxXKH42BAwTClmr8peabw-34nMirCaf9OoFXwd0ItU",
+#    "VAPID_PRIVATE_KEY": "S5_hHrqZfvNKFzfoDy4xRhjyu0jOV-mYeIO8joWN1oM",
+#    "VAPID_ADMIN_EMAIL": "project01oddm@gmail.com"
+# }
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -123,6 +139,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -130,3 +152,8 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+
+# cred_path = os.path.join(BASE_DIR, "serviceAccountKey.json")
+# cred = credentials.Certificate(cred_path)
+# firebase_admin.initialize_app(cred)

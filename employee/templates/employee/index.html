@@ -1,10 +1,28 @@
 {% extends 'base.html' %}
+{% load qr_code %}
 
 {% block content %}
   <h1>employee</h1>
   <hr>
-  <a href="{% url 'employee:study' %}">강의 듣기</a>
-  <a href="{% url 'employee:study' %}">출퇴근 관리</a>
-
-  
+  <div class="d-flex flex-column justify-content-center align-items-center">
+    {% if user.user_type > "2" %}
+      <button type="button" class="btn btn-primary my-4">
+        <a href="{% url 'manager:index' request.user.username %}" style="color: white; text-decoration: none;">QR 코드 스캔</a>
+      </button><br/>
+    {% endif %}
+    <button type="button" class="btn btn-primary my-4">
+      <a href="{% url 'suggestions:index' %}" style="color: white; text-decoration: none;">근로자 안전제언</a>
+    </button><br/>
+    <div>
+      <h3>출근 QR 코드</h3>
+      <p>{% qr_from_text user.name size=20 border=6 %}</p>
+    </div>
+    <!--작업장 전체 알람,,,,!-->
+    <button type="button" class="btn btn-danger my-4">
+      <a href="{% url 'employee:study' %}" style="color: white; text-decoration: none;">작업 중지권 발동</a>
+    </button><br/>
+    <button type="button" class="btn btn-warning my-4">
+      <a href="{% url 'complain:index' %}" style="color: black; text-decoration: none;">이러한 부분이 불편해요 (시스템 불편사항 접수)</a>
+    </button><br/>
+  </div>
 {% endblock content %}

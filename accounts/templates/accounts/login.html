@@ -6,7 +6,7 @@
   <form action="" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit">
+    <input type="submit" value="로그인">
   </form>
   <a href="{% url 'employee:index' %}">back</a>
 {% endblock content %}

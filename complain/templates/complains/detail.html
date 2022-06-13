@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>DETAIL</h1>
+  <h3>{{ complain.pk }}번째 글</h3>
+  <hr>
+  <p>제목 : {{ complain.title }}</p>
+  <p>내용 : {{ complain.content }}</p>
+  <p>작성 시각 : {{ complain.created_at }}</p>
+  <p>수정 시각 : {{ complain.updated_at }}</p>
+  <hr>
+  {% if request.user == complain.user %}
+    <a href="{% url 'complain:update' complain.pk %}">수정</a>
+    <form action="{% url 'complain:delete' complain.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="삭제">
+    </form>
+  {% endif %}
+  <a href="{% url 'complain:index' %}">back</a>
+  <hr>
+  
+  <ul>
+    {% if complain.comment %}
+      <li>
+        {% if complain.comment.status == "1" %}
+          <p style="color: yellow;">처리중</p>
+        {% elif complain.comment.status == "2" %}
+          <p style="color: red;">반려</p>
+        {% else %}
+          <p style="color: green;">처리완료</p>
+        {% endif %}
+        <p>반려 사유 : {{ complain.comment.reason }}</p> 
+
+        {% if request.user == comment.user %}
+          <form action="{% url 'complain:comment_delete' complain.pk comment.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="삭제">
+          </form>
+        {% endif %}
+      </li>
+    
+  </ul>
+  <hr>
+  {% endif %}
+{% endblock content %}

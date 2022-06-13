@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+    관리자 이름 : {{ person.name }}<br>
+    출근 등록된 근로자
+    {% for attendanceList in attendanceLists %}
+        <p>{{ attendanceList.employee }}</p>
+    {% endfor %}
+    <a href="{% url 'manager:scanner' request.user.username %}">큐알코드 스캔</a>
+    <a href="{% url 'employee:index' %}">뒤로가기</a>
+</div>
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>DETAIL</h1>
+  <h3>{{ suggestion.pk }}번째 글</h3>
+  <hr>
+  <p>제목 : {{ suggestion.title }}</p>
+  <p>내용 : {{ suggestion.content }}</p>
+  <p>작성 시각 : {{ suggestion.created_at }}</p>
+  <p>수정 시각 : {{ suggestion.updated_at }}</p>
+  <hr>
+  {% if request.user == suggestion.user %}
+    <a href="{% url 'suggestions:update' suggestion.pk %}">수정</a>
+    <form action="{% url 'suggestions:delete' suggestion.pk %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="삭제">
+    </form>
+  {% endif %}
+  <a href="{% url 'suggestions:index' %}">back</a>
+  <hr>
+  
+  <ul>
+    {% if suggestion.comment %}
+      <li>
+        {% if suggestion.comment.status == "1" %}
+          <p style="color: yellow;">처리중</p>
+        {% elif suggestion.comment.status == "2" %}
+          <p style="color: red;">반려</p>
+        {% else %}
+          <p style="color: green;">처리완료</p>
+        {% endif %}
+        <p>반려 사유 : {{ suggestion.comment.reason }}</p> 
+
+        {% if request.user == comment.user %}
+          <form action="{% url 'suggestions:comment_delete' suggestion.pk comment.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="삭제">
+          </form>
+        {% endif %}
+      </li>
+    
+  </ul>
+  <hr>
+  {% else %}
+    {% if request.user.is_authenticated %}
+      <form action="{% url 'suggestions:comment_create' suggestion.pk %}" method="POST">
+        {% csrf_token %}
+        {{ comment_form }}
+        <input type="submit">
+      </form>
+    {% else %}
+      <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
+    {% endif %}
+  {% endif %}
+{% endblock content %}

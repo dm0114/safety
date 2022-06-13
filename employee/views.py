@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, redirect, get_object_or_404
+
 from django.views.decorators.http import require_http_methods, require_POST, require_safe
-from django.shortcuts import render, redirect
 from employee.models import StudyList
 
 # Create your views here.
@@ -35,5 +37,10 @@ def test(request, pk):
 
 # 입출결 - QR코드 생성
 @login_required
-def attendance(request):
-    return
+def suggestion(request, username):
+    person = get_object_or_404(get_user_model(), username=username) # user 이름으로 넘기면 될듯
+    context ={
+        'person' : person,
+    }
+    return render(request, 'employee/suggestion.html', context)
+    

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>나의 안전 제언</h1>
+  {% if request.user.is_authenticated %}
+    <button type="button" class="btn btn-primary my-4">
+      <a href="{% url 'suggestions:create' %}" style="color: white; text-decoration: none;">제안하기</a>
+    </button><br/>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">[새 글을 작성하려면 로그인 하세요]</a>
+  {% endif %}
+  <hr>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">상태</th>
+        <th scope="col">제목</th>
+        <th scope="col">상세 내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for suggestion in suggestions %}
+        <tr>
+          <th>{{ suggestion.pk }}</th>
+          {% if suggestion.comment.status == "1" %}
+            <td style="color: yellow;">처리중</td>
+          {% elif suggestion.comment.status == "2" %}
+            <td style="color: red;">반려</td>
+          {% else %}
+            <td style="color: green;">처리완료</td>
+          {% endif %}
+          <td>{{ suggestion.title }}</td>
+          <td><a href="{% url 'suggestions:detail' suggestion.pk %}">상세 내용</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
+  
+
+  {% comment %} {% for suggestion in suggestions %}
+    {% if suggestion.comment.status == "1" %}
+      <p style="color: yellow;">처리중</p>
+    {% elif suggestion.comment.status == "2" %}
+      <p style="color: red;">반려</p>
+    {% else %}
+      <p style="color: green;">처리완료</p>
+    {% endif %}
+    <p>글 제목: {{ suggestion.title }}</p>
+    <p>글 내용: {{ suggestion.content }}</p>
+    <a href="{% url 'suggestions:detail' suggestion.pk %}">상세 내용</a>
+    <hr>
+  {% endfor %} {% endcomment %}
+{% endblock content %}
