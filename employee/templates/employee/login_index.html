@@ -13,9 +13,10 @@
     <button type="button" class="btn btn-primary my-4">
       <a href="{% url 'suggestions:index' %}" style="color: white; text-decoration: none;">근로자 안전제언</a>
     </button><br/>
-    <button type="button" class="btn btn-primary my-4">
-      <a href="{% url 'employee:quiz' %}" style="color: white; text-decoration: none;">출근 등록</a>
-    </button><br/>
+    <div>
+      <h3>출근 QR 코드</h3>
+      <p>{% qr_from_text user.name size=20 border=6 %}</p>
+    </div>
     <!--작업장 전체 알람,,,,!-->
     <button type="button" class="btn btn-danger my-4">
       <a href="{% url 'employee:study' %}" style="color: white; text-decoration: none;">작업 중지권 발동</a>

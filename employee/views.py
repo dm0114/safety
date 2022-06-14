@@ -8,9 +8,18 @@ from employee.models import StudyList
 
 # Create your views here.
 # 작업자들이 들어가면 보게 될 메인 화면
+
 @login_required
 def index(request):
     return render(request, 'employee/index.html')
+
+@login_required
+def login_index(request):
+    return render(request, 'employee/login_index.html')
+
+@login_required
+def quiz(request):
+    return render(request, 'employee/quiz.html')
 
 # 모든 강의 목록, 최신 순으로 나열
 @login_required
