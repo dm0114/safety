@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>관련 법률</p>
+    <a href="{% url 'employee:ex' %}" style="text-decoration: none;">< 뒤로</a>
+    <a href="{% url 'employee:quiz' %}" style="text-decoration: none;">다음으로 ></a>
+{% endblock content %}

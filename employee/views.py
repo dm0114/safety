@@ -18,6 +18,14 @@ def login_index(request):
     return render(request, 'employee/login_index.html')
 
 @login_required
+def ex(request):
+    return render(request, 'employee/ex.html')
+
+@login_required
+def law(request):
+    return render(request, 'employee/law.html')
+
+@login_required
 def quiz(request):
     return render(request, 'employee/quiz.html')
 

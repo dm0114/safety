@@ -2,9 +2,27 @@
 {% load qr_code %}
 
 {% block content %}
-  <h1>employee</h1>
-  <hr>
   <div class="d-flex flex-column justify-content-center align-items-center">
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="myInput" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="myInput">경고</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            작업 중지권이 발동되었습니다!<br> 관리자의 지시가 있을떄까지 대기하여 주십시오.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인했습니다</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     {% if user.user_type > "2" %}
       <button type="button" class="btn btn-primary my-4">
         <a href="{% url 'manager:index' request.user.username %}" style="color: white; text-decoration: none;">QR 코드 스캔</a>
@@ -14,14 +32,25 @@
       <a href="{% url 'suggestions:index' %}" style="color: white; text-decoration: none;">근로자 안전제언</a>
     </button><br/>
     <button type="button" class="btn btn-primary my-4">
-      <a href="{% url 'employee:quiz' %}" style="color: white; text-decoration: none;">출근 등록</a>
+      <a href="{% url 'employee:ex' %}" style="color: white; text-decoration: none;">문제 풀이</a>
     </button><br/>
     <!--작업장 전체 알람,,,,!-->
-    <button type="button" class="btn btn-danger my-4">
-      <a href="{% url 'employee:study' %}" style="color: white; text-decoration: none;">작업 중지권 발동</a>
+    <button type="button" class="btn btn-danger my-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      작업 중지권 발동
     </button><br/>
+
     <button type="button" class="btn btn-warning my-4">
       <a href="{% url 'complain:index' %}" style="color: black; text-decoration: none;">이러한 부분이 불편해요 (시스템 불편사항 접수)</a>
     </button><br/>
+
+
+    <script>
+      const myModal = document.getElementById('myModal')
+      const myInput = document.getElementById('myInput')
+
+      myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+      })
+    </script>
   </div>
 {% endblock content %}
