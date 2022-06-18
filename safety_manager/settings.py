@@ -30,6 +30,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     ".ap-northeast-2.compute.amazonaws.com",
     "safety-system.click",
+    "172.31.1.197",
 ]
 
 
