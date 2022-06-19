@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>DETAIL</h1>
-  <h3>{{ complain.pk }}번째 글</h3>
+<div class="card p-4" >
+  <h1>나의 건의</h1>
   <hr>
   <p>제목 : {{ complain.title }}</p>
   <p>내용 : {{ complain.content }}</p>
@@ -16,11 +16,12 @@
       <input type="submit" value="삭제">
     </form>
   {% endif %}
-  <a href="{% url 'complain:index' %}">back</a>
-  <hr>
+  
   
   <ul>
+    
     {% if complain.comment %}
+    <hr>
       <li>
         {% if complain.comment.status == "1" %}
           <p style="color: yellow;">처리중</p>
@@ -38,8 +39,9 @@
           </form>
         {% endif %}
       </li>
-    
   </ul>
   <hr>
   {% endif %}
+  <a href="{% url 'complain:index' %}" class="btn btn-secondary mt-4">뒤로 가기</a>
+</div>
 {% endblock content %}

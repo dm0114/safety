@@ -35,23 +35,27 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>근로자 출력등록2</h1>
-    <div>
-        <p>제3조(전도의 방지)</p>
-        <p>#안전보건규칙 #제2장 #작업장 #전도 #청결 #근로자</p>
-        <div class="quiz-container">
-            <div id="quiz"> </div>
+    <div class="container">
+        <div class="mt-4 mb-4">
+            <h1 >근로자 출력등록2</h1>
         </div>
-        
-        <div class="quiz-ctrl">
-           <button id="previous" class="quiz-btn"> back </button>
-           <button id="next" class="quiz-btn"> next </button>
-           <button id="submit" class="quiz-btn"> 결과확인 </button>
-           <div id="result"> </div>
+        <div class="card p-5">
+            <p>제3조(전도의 방지)</p>
+            <p>#안전보건규칙 #제2장 #작업장 #전도 #청결 #근로자</p>
+            <div class="quiz-container">
+                <div id="quiz"> </div>
+            </div>
+            
+            <div class="quiz-ctrl">
+                <button id="next" class="quiz-btn btn btn-primary mt-4"> 다음 문제 </button>
+                <button id="submit" class="quiz-btn btn btn-info mt-4 mx-2"> 결과확인 </button>
+                <button id="previous" class="quiz-btn btn btn-secondary mt-4"> 이전 문제 </button>
+               <div id="result" class="text-center"> </div>
+            </div>
         </div>
+        <a href="{% url 'employee:login_index' %}" id="move" style="display: none;" class="btn btn-info mt-4">출근 등록</a>
+        <a href="{% url 'employee:ex' %}" style="text-decoration: none;" class="btn btn-secondary mt-4">메인으로</a>
     </div>
-    <a href="{% url 'employee:login_index' %}" id="move" style="display: none;">출근 등록</a>
-    <a href="{% url 'employee:law' %}" style="text-decoration: none;">< 뒤로</a>
 
 
     <script>

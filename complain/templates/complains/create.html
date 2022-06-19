@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>CREATE</h1>
+<div class="card p-4" >
+  <h1>건의하기</h1>
   <hr>
   <form action="{% url 'complain:create' %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit">
+    <input type="submit" value="건의하기" class="btn btn-primary me-2 mt-4" >
+    <a href="{% url 'complain:index' %}" class="btn btn-secondary mt-4">뒤로 가기</a>
   </form>
-  <a href="{% url 'complain:index' %}">back</a>
+</div>
 {% endblock content %}

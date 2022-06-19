@@ -1,6 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p>사망사고사례</p>
-    <a href="{% url 'employee:index' %}" style="text-decoration: none;">< 뒤로</a>
-    <a href="{% url 'employee:law' %}" style="text-decoration: none;">다음으로 ></a>
+    <p class="h3">사망사고사례</p>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row ">사고명</th>
+            <td>고양향동 지원 4BL 손가락 골절사고</td>
+
+          </tr>
+          <tr>
+            <th scope="row">발생 일시</th>
+            <td>2022-06-07 오후 03:20</td>
+
+          </tr>
+          <tr>
+            <th scope="row">사고 경위</th>
+            <td>2022년 06 07일 오후 3시 20분경 재해자 성**씨는 동료인 최**씨와 함께 1층 기둥 거푸집 해체작업중 최**씨가 해체한 기둥밴드가 보거푸집 지지와이어로 떨어지면서 반대편에서 해체작업 대기 중이던 재해자 성**씨의 왼쪽 손이 보거푸집 지지 와이어에 부딪치면서 좌측 5번쨰 손가락의 근위지골골절 및 약지손가락이 찢어지는 사고</td>
+
+          </tr>
+        </tbody>
+      </table>
+    <a href="{% url 'employee:quiz' %}" style="text-decoration: none;" class="btn btn-primary">다음으로</a>
+    <a href="{% url 'employee:index' %}" style="text-decoration: none;" class="btn btn-secondary mx-2">뒤로 가기</a>
 {% endblock content %}

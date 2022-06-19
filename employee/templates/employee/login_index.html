@@ -2,27 +2,54 @@
 {% load qr_code %}
 
 {% block content %}
-  <h1>employee</h1>
-  <hr>
+
   <div class="d-flex flex-column justify-content-center align-items-center">
-    {% if user.user_type > "2" %}
-      <button type="button" class="btn btn-primary my-4">
-        <a href="{% url 'manager:index' request.user.username %}" style="color: white; text-decoration: none;">QR 코드 스캔</a>
-      </button><br/>
-    {% endif %}
-    <button type="button" class="btn btn-primary my-4">
-      <a href="{% url 'suggestions:index' %}" style="color: white; text-decoration: none;">근로자 안전제언</a>
-    </button><br/>
-    <div>
-      <h3>출근 QR 코드</h3>
+     <div>
+      <p class="h3 text-center">출근 QR 코드</p>
       <p>{% qr_from_text user.name size=20 border=6 %}</p>
     </div>
-    <!--작업장 전체 알람,,,,!-->
-    <button type="button" class="btn btn-danger my-4">
-      <a href="{% url 'employee:study' %}" style="color: white; text-decoration: none;">작업 중지권 발동</a>
-    </button><br/>
-    <button type="button" class="btn btn-warning my-4">
-      <a href="{% url 'complain:index' %}" style="color: black; text-decoration: none;">이러한 부분이 불편해요 (시스템 불편사항 접수)</a>
-    </button><br/>
+  </div>
+
+  <div class="row ">
+    {% if user.user_type > "2" %}
+    <div class="col-sm-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">QR코드 스캔</h5>
+          <p class="card-text">관리자라면 출근 등록을 진행하기 위해서 큐알 코드 스캔을 진행해 주세요</p>
+          <a href="{% url 'manager:index' request.user.username %}" style="color: white; text-decoration: none;" class="btn btn-primary">QR 코드 스캔</a>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="col-sm-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">근로자 안전제언</h5>
+          <p class="card-text">나와 동료근로자들의 안전을 위해서 위험한 일을 미리 제언하여 사고를 방지해주세요.</p>
+          <a href="{% url 'suggestions:index' %}" style="color: white; text-decoration: none;" class="btn btn-primary">근로자 안전제언</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">작업 중지권을 발동합니다</h5>
+          <p class="card-text">근로자 또는 관리자가 작업 중지권을 발동합니다. 발동 후 관리자의 지시가 있을때 까지 기다려 주십시오</p>
+          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            작업 중지권 발동
+          </button><br/>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">시스템 불편사항 접수</h5>
+          <p class="card-text">시스템의 불편한 점을 건의해주세요. <br>불편한 점은 신속히 처리해 드리겠습니다.<br><br></p>
+          <a href="{% url 'complain:index' %}" style="color: black; text-decoration: none;" class="btn btn-warning">시스템 불편사항 접수</a>
+        </div>
+      </div>
+    </div>
   </div>
 {% endblock content %}

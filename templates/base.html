@@ -14,18 +14,19 @@
   </head>
   <body>
     <!-- 유효성 검증 통과 -->
-    <nav class="d-flex flex-row m-3 ">
+    <nav class="d-flex flex-row m-3 justify-content-end align-items-center">
       {% if request.user.is_authenticated %}
-        <div>
-          <h3>안녕하세요, {{ user.name }} 님</h3>
+        <div class="my-auto">
+          <p class="h5 mb-0">안녕하세요, {{ user.name }} 님</p>
         </div>
         <div class="ms-4">
           <!-- 로그아웃 -->
           <form action="{% url 'accounts:logout' %}" method="POST">
             {% csrf_token %}
-            <input type="submit" value="로그아웃" class="btn-primary"/>
+            <input type="submit" value="로그아웃" class="btn btn-info"/>
           </form>
         </div>
+        
 
         {% comment %}
         <!-- 회원 정보 수정 -->
@@ -51,6 +52,7 @@
         </div>
       {% endif %} 
     </nav>
+    <hr>
 
     <div class="container">
       {% block content %} {% endblock content %}
