@@ -56,10 +56,14 @@
         </div>
       </div>
       {% endif %}
-      <div style="width: 75px; height: 75px; border-radius: 50px; position: absolute; bottom: 30px; right: 30px; ">
-        <a href="{% url 'complain:index' %}" style="" >
-          <img src="https://cdn.vectorstock.com/i/1000x1000/42/85/loudspeaker-megaphone-line-black-icon-vector-28164285.webp" alt="" style="width: 100%; height: 100%; object-fit: cover;">
-        </a>
+      <div style="width: 75px; height: 75px; border-radius: 50px; position: fixed; bottom: 30px; right: 30px; background: white;">
+        <div class="d-flex justify-content-center align-items-center" style="height: 100%">
+          <div style="text-align: center">
+            <a href="{% url 'complain:index' %}" >
+                <img src="https://cdn-icons-png.flaticon.com/128/596/596092.png" alt="" style="width: 50%; height: 50%; border-radius: 50px" >
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
