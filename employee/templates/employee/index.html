@@ -1,87 +1,98 @@
-{% extends 'base.html' %}
+{% extends 'base_login.html' %}
 {% load qr_code %}
 
 {% block content %}
-  <div class="d-flex flex-column justify-content-center align-items-center">
 
+  <div class="w-100 my-5" >
+    <img src="https://media.istockphoto.com/photos/safety-construction-worker-hats-blue-white-yellow-orange-teamwork-of-picture-id1205863144?k=20&m=1205863144&s=612x612&w=0&h=BxkJXCFWIe-jrHQopkDYDg8ymT0lssD1fEbbiCeCZz4=" alt="" style="object-fit: cover; width: 100%">
+  </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="myInput" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="myInput">경고</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            작업 중지권이 발동되었습니다!<br> 관리자의 지시가 있을떄까지 대기하여 주십시오.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">확인했습니다</button>
+  <div class="container">
+
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="myInput" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="myInput">경고</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              작업 중지권이 발동되었습니다!<br> 관리자의 지시가 있을떄까지 대기하여 주십시오.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">확인했습니다</button>
+            </div>
           </div>
         </div>
       </div>
+  
+      <div class="row ">
+        <div class="col-sm-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">출력 등록</h5>
+              <hr>
+              <p class="card-text">QR 코드 출근을 찍기 위해 사고 사례를 보고 문제를 풉니다.</p>
+              <div style="text-align: right;">
+                <a href="{% url 'employee:ex' %}" style="color: white; text-decoration: none; width: 160px" class="btn btn-primary text-right">출력 등록&nbsp > </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">안전 신문고</h5>
+              <hr>
+              <p class="card-text">현장의 무사고를 위해, 동료를 위해 불안한 상황을 제보해 주세요.</p>
+              <div style="text-align: right;">
+                <a href="{% url 'suggestions:index' %}" style="color: white; text-decoration: none; width: 160px" class="btn btn-primary text-right">근로자 안전제언&nbsp > </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 mb-4">
+          <div class="card" style="border: none; color: white; background-image: url('https://media.istockphoto.com/photos/miner-in-a-yellow-hard-hat-on-a-black-background-dirty-with-coal-dust-picture-id1352297658?k=20&m=1352297658&s=612x612&w=0&h=zwMPzcw8MM15t8j3nlCwHJRJc40gXg5E8BNBTom2_qc=');">
+            <div class="card-body">
+              <h5 class="card-title">자기 보호권</h5>
+              <hr>
+              <p class="card-text">불안한 상황에서 일을 강요받거나, 사고가 당장이라도 날 것 같으면 신고해주시고 작업을 모두 멈춰주세요.</p>
+              <div style="text-align: right;">
+                <button type="button" class="btn btn-danger" style="width: 160px" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  작업 중지권 발동&nbsp >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% if user.user_type > "2" %}
+        <div class="col-sm-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">QR코드 스캔</h5>
+              <hr>
+              <p class="card-text">관리자라면 출근 등록을 진행하기 위해서 큐알 코드 스캔을 진행해 주세요</p>
+              <a href="{% url 'manager:index' request.user.username %}" style="color: white; text-decoration: none;" class="btn btn-primary">QR 코드 스캔</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      <div style="width: 75px; height: 75px; border-radius: 50px; position: absolute; bottom: 30px; right: 30px; ">
+        <a href="{% url 'complain:index' %}" style="" >
+          <img src="https://cdn.vectorstock.com/i/1000x1000/42/85/loudspeaker-megaphone-line-black-icon-vector-28164285.webp" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+        </a>
+      </div>
+      <script>
+        const myModal = document.getElementById('myModal')
+        const myInput = document.getElementById('myInput')
+  
+        myModal.addEventListener('shown.bs.modal', () => {
+          myInput.focus()
+        })
+      </script>
     </div>
-
-    <div class="row ">
-      {% if user.user_type > "2" %}
-      <div class="col-sm-12 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">QR코드 스캔</h5>
-            <p class="card-text">관리자라면 출근 등록을 진행하기 위해서 큐알 코드 스캔을 진행해 주세요</p>
-            <a href="{% url 'manager:index' request.user.username %}" style="color: white; text-decoration: none;" class="btn btn-primary">QR 코드 스캔</a>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-      <div class="col-sm-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">문제 풀이</h5>
-            <p class="card-text">QR 코드 출근을 찍기 위해 사고 사례를 보고 문제를 풉니다.</p>
-            <a href="{% url 'employee:ex' %}" style="color: white; text-decoration: none;" class="btn btn-primary">문제 풀이</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">근로자 안전제언</h5>
-            <p class="card-text">나와 동료근로자들의 안전을 위해서 위험한 일을 미리 제언하여 사고를 방지해주세요.</p>
-            <a href="{% url 'suggestions:index' %}" style="color: white; text-decoration: none;" class="btn btn-primary">근로자 안전제언</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">작업 중지권을 발동합니다</h5>
-            <p class="card-text">근로자 또는 관리자가 작업 중지권을 발동합니다. 발동 후 관리자의 지시가 있을때 까지 기다려 주십시오</p>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              작업 중지권 발동
-            </button><br/>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">시스템 불편사항 접수</h5>
-            <p class="card-text">시스템의 불편한 점을 건의해주세요. <br>불편한 점은 신속히 처리해 드리겠습니다.<br><br></p>
-            <a href="{% url 'complain:index' %}" style="color: black; text-decoration: none;" class="btn btn-warning">시스템 불편사항 접수</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const myModal = document.getElementById('myModal')
-      const myInput = document.getElementById('myInput')
-
-      myModal.addEventListener('shown.bs.modal', () => {
-        myInput.focus()
-      })
-    </script>
   </div>
 {% endblock content %}
