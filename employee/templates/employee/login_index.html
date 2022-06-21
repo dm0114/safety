@@ -3,9 +3,9 @@
 
 {% block content %}
 
-  <div class="w-100 my-5" >
+  {% comment %} <div class="w-100 my-5" >
     <img src="https://media.istockphoto.com/photos/safety-construction-worker-hats-blue-white-yellow-orange-teamwork-of-picture-id1205863144?k=20&m=1205863144&s=612x612&w=0&h=BxkJXCFWIe-jrHQopkDYDg8ymT0lssD1fEbbiCeCZz4=" alt="" style="object-fit: cover; width: 100%">
-  </div>
+  </div> {% endcomment %}
 
   <div class="d-flex flex-column justify-content-center align-items-center">
      <div>
@@ -18,21 +18,20 @@
     <div class="row ">
    
       <div class="col-sm-12 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">안전 신문고</h5>
-            <hr>
-            <p class="card-text">현장의 무사고를 위해, 동료를 위해 불안한 상황을 제보해 주세요.</p>
-            <div style="text-align: right;">
-              <a href="{% url 'suggestions:index' %}" style="color: white; text-decoration: none; width: 160px" class="btn btn-primary text-right">근로자 안전제언&nbsp > </a>
+        <div class="card" style="background-image: url('https://t4.ftcdn.net/jpg/01/68/55/41/240_F_168554180_rT3GO4tcgl6c1m1mpTPnkoBEvtkaHoIz.jpg'); background-size: 100%;">
+          <a href="{% url 'suggestions:index' %}" style="color: black; text-decoration: none;">
+            <div class="card-body">
+              <h5 class="card-title">안전 신문고&nbsp ></h5>
+              <hr>
+              <p class="card-text">현장의 무사고를 위해, 동료를 위해 불안한 상황을 제보해 주세요.</p><br>
             </div>
-          </div>
+          </a>
         </div>
       </div>
       <div class="col-sm-12 mb-4">
-        <div class="card">
+        <div class="card" style="border: none; color: white; background-image: url('https://media.istockphoto.com/photos/miner-in-a-yellow-hard-hat-on-a-black-background-dirty-with-coal-dust-picture-id1352297658?k=20&m=1352297658&s=612x612&w=0&h=zwMPzcw8MM15t8j3nlCwHJRJc40gXg5E8BNBTom2_qc=');">
           <div class="card-body">
-            <h5 class="card-title">자기 보호권</h5>
+            <h5 class="card-title">자기 보호권&nbsp ></h5>
             <hr>
             <p class="card-text">불안한 상황에서 일을 강요받거나, 사고가 당장이라도 날 것 같으면 신고해주시고 작업을 모두 멈춰주세요.</p>
             <div style="text-align: right;">
